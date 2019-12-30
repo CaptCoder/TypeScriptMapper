@@ -1,0 +1,7 @@
+{
+    "name": "typescriptmapper",
+    "version": "1.0.0",
+    "description": "Map custom typescript types to objects",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts"
+  }
