@@ -1,4 +1,4 @@
-import {httpMapperPromise, httpMapper} from './index';
+import {mapPromise, mapPromises} from './index';
 
 interface Test{
     name: string;
@@ -19,20 +19,39 @@ class Test2 {
 }
 
 let test: Test2 = new Test2();
-let prom = new Promise((resolve, reject) =>{
+
+let promise1 = new Promise((resolve, reject) =>{
 
     let a = {'name': 4, 'test': 'testing', 'boolean': true};
     setTimeout(() =>{
         resolve(a)
     }, 1500)
-})
-
-//let temp = httpMapper<Test>(prom);
-let temp = httpMapperPromise<Test>(prom).then((result: Test) =>{
-    console.log(result);
 });
 
-let temp2 = httpMapper<Test2>(test, prom).then((result: Test2) =>{
-    console.log(result);
+let promise2 = new Promise((resolve, reject) =>{
+
+    let a = {'name': 5, 'test': 'testing', 'boolean': true};
+    setTimeout(() =>{
+        resolve(a)
+    }, 1500)
 });
 
+
+
+
+async function MapResponse(){
+    const result: Test2 = await mapPromise<Test2>(test,promise1);
+    console.log(result);
+}
+
+MapResponse();
+
+let testArray: Test2[] = new Array<Test2>();
+
+let promiseArray:Promise<any>[] = []
+promiseArray.push(promise1, promise2);
+
+async function MapResponses(){
+    const result: Test2[] = await mapPromises<Test2>(testArray,promiseArray);
+    console.log(result);
+}
