@@ -1,2 +1,2 @@
 # TypeScriptMapper
-Simple mapper to map typescript types/objects to various objects and http responses
+Simple TypeScript mapper to map initialized TypeScript classes and objects to promise responses
